@@ -42,7 +42,7 @@ image_transport
 catkin_package(
 #  INCLUDE_DIRS include
  LIBRARIES camera
- CATKIN_DEPENDS roscpp image_transport
+ CATKIN_DEPENDS roscpp image_transport opencv2 cv_bridge std_msgs
 #  DEPENDS system_lib
 )
 

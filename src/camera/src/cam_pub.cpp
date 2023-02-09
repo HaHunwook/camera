@@ -3,7 +3,7 @@
 
 void imageCallback(const sensor_msgs::ImageConstPtr& msg)
 {
-  
+  ROS_INFO("hh");
 }
 int main(int argc,char** argv)
 {

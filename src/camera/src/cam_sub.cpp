@@ -8,7 +8,7 @@ class cameraON
     ros::NodeHandle nh;
     ros::Subscriber image_sub;
     public:
-        cameraON()//생성자
+        cameraON()
         {
             image_sub = nh.subscribe("/usb_cam/image_raw", 1, &cameraON::cam_start_Callback, this);
         }

@@ -10,7 +10,11 @@ project(camera)
 find_package(catkin REQUIRED COMPONENTS
 roscpp
 image_transport
+cv_bridge
+sensor_msgs
+std_msgs
 )
+find_package(OpenCV REQUIRED)
 
 ## Generate messages in the 'msg' folder
 # add_message_files(
@@ -42,7 +46,7 @@ image_transport
 catkin_package(
 #  INCLUDE_DIRS include
  LIBRARIES camera
- CATKIN_DEPENDS roscpp image_transport opencv2 cv_bridge std_msgs
+ CATKIN_DEPENDS roscpp cv_bridge sensor_msgs std_msgs image_transport
 #  DEPENDS system_lib
 )
 
@@ -65,3 +69,7 @@ ${catkin_INCLUDE_DIRS}
 add_executable(cam_pub src/cam_pub.cpp)
 add_dependencies(cam_pub ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 target_link_libraries(cam_pub ${catkin_LIBRARIES})
+
+add_executable(cam_sub src/cam_sub.cpp)
+add_dependencies(cam_sub ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+target_link_libraries(cam_sub ${catkin_LIBRARIES})

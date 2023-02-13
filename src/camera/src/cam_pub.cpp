@@ -7,16 +7,16 @@ int main(int argc, char** argv)
 {
   ros::init(argc, argv, "image_publisher");
   ros::NodeHandle nh;
-  image_transport::ImageTransport it(nh); //이미지 형태 변환
-  image_transport::Publisher pub = it.advertise("usb_cam/image", 1);
+  image_transport::ImageTransport it(nh);
+  image_transport::Publisher pub = it.advertise("usb_cam/image_raw", 1);
 
-  cv::VideoCapture cap(0);
-  cv::Mat frame;
+  cv::VideoCapture cam(0);
+  cv::Mat data;
   sensor_msgs::ImagePtr msg;
   while (nh.ok())
   {
-    cap >> frame;
-    msg = cv_bridge::CvImage(std_msgs::Header(), "bgr8", frame).toImageMsg();
+    cam >> data;
+    msg = cv_bridge::CvImage(std_msgs::Header(), "bgr8", data).toImageMsg();
     pub.publish(msg);
     ros::spinOnce();
   }

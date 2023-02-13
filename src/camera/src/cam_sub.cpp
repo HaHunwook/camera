@@ -11,7 +11,7 @@ class cam
     public:
         cam(): it(nh)
         {
-            image_sub = it.subscribe("usb_cam/image", 1, &cam::imageCallback, this);
+            image_sub = it.subscribe("usb_cam/image_raw", 1, &cam::imageCallback, this);
         }
         ~cam()
         {
@@ -20,14 +20,13 @@ class cam
         void imageCallback(const sensor_msgs::ImageConstPtr& msg)
         {
             cv::imshow("view", cv_bridge::toCvShare(msg, "bgr8")->image);
-            cv::waitKey(5);            
+            cv::waitKey(1);            
         }
 };
 
 int main(int argc, char **argv)
 {
-    ros::init(argc, argv, "image_listener");
+    ros::init(argc, argv, "image_sub");
     cam ic;
     ros::spin();
-    cv::destroyWindow("view");
 }
